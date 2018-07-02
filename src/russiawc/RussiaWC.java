@@ -5,6 +5,9 @@
  */
 package russiawc;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.Arrays;
@@ -19,8 +22,10 @@ public class RussiaWC {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        // TODO code application logic here
+    public static void main(String[] args) throws FileNotFoundException {
+        // TODO code application logic here    
+        PrintStream out = new PrintStream(new FileOutputStream("RussiaWC.txt"));
+        
         //National Team [0] | Rating [1] | Points [2] | Goals [3] | Goals Conceded [4]
         String[][] A = {{"Russia", "6.7", "0", "0", "0"}, {"Saudi Arabia", "4.4", "0", "0", "0"}, {"Egypt", "4.6", "0", "0", "0"}, {"Uruguay", "7.8", "0", "0", "0"}};
         String[][] B = {{"Portugal", "8.2", "0", "0", "0"}, {"Spain", "8.7", "0", "0", "0"}, {"Iran", "5.9", "0", "0", "0"}, {"Morocco", "5.8", "0", "0", "0"}};
@@ -162,11 +167,15 @@ public class RussiaWC {
         //**************************************************THIRD PLACE***********************************************************
         System.out.println("\n\n\t\t\t\t THIRD PLACE\n");
         knockout.GetKnockoutResult(SF1_L, r_SF1_L, SF2_L, r_SF2_L);
+        out.println(knockout.getWinnerTeam());
         
         //*****************************************************FINAL**************************************************************
         System.out.println("\n\n\t\t\t\t FINAL\n");
         knockout.GetKnockoutResult(SF1_W, r_SF1_W, SF2_W, r_SF2_W);
         
         System.out.println("Russia World Cup 2018 WINNER : " + knockout.getWinnerTeam() + "\n");
+        
+        out.println(knockout.getWinnerTeam());
+        System.setOut(out);
     }
 }
